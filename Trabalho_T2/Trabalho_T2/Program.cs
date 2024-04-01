@@ -92,9 +92,9 @@ class Program
 
             static void ImprimirProdutosMenosVendidos(List<Produto> produtos)
             {
-                var bottom5 = produtos.OrderBy(p => p.QtdVendida).Take(5);
+                var menosVendida = produtos.OrderBy(p => p.QtdVendida).Take(5);
                 Console.WriteLine("Produtos menos vendidos (Top 5):");
-                foreach (var produto in bottom5)
+                foreach (var produto in menosVendida)
                 {
                     Console.WriteLine($"{produto.Codigo} - {produto.Descricao}: {produto.QtdVendida}");
                 }
