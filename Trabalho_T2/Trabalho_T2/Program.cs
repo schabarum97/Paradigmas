@@ -81,7 +81,7 @@ class Program
                 }
             }
 
-                static void ImprimirCategoriaMaisVendida(List<Produto> produtos)
+            static void ImprimirCategoriaMaisVendida(List<Produto> produtos)
             {
                 var categoriaMaisVendida = produtos.GroupBy(p => p.Categoria)
                                                    .OrderByDescending(g => g.Sum(p => p.QtdVendida))
