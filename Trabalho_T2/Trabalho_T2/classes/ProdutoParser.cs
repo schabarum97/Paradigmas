@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace Trabalho_T2.classes
 {
@@ -34,7 +35,7 @@ namespace Trabalho_T2.classes
                     Codigo = Convert.ToInt32(line.Split(';')[(int)Header.Codigo]),
                     Descricao = line.Split(';')[(int)Header.Descricao],
                     Categoria = line.Split(';')[(int)Header.Categoria],
-                    Preco = Convert.ToDouble(line.Split(";")[(int)Header.Preco]),
+                    Preco = Convert.ToDouble(line.Split(";")[(int)Header.Preco], CultureInfo.InvariantCulture), 
                     Estoque = Convert.ToInt32(line.Split(';')[(int) Header.Estoque]),
                     QtdVendida = Convert.ToInt32(line.Split(';')[(int) Header.QtdVendida])
                 };
