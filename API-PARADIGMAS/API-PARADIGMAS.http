@@ -1,0 +1,6 @@
+@API_PARADIGMAS_HostAddress = http://localhost:5299
+
+GET {{API_PARADIGMAS_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
