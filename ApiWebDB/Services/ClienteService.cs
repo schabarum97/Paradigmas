@@ -6,6 +6,7 @@ using ApiWebDB.Services.Parser;
 using ApiWebDB.Services.Validate;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ApiWebDB.Services
@@ -64,9 +65,22 @@ namespace ApiWebDB.Services
 
         public TbCliente GetById(int id)
         {
-            return _dbContext.TbClientes.FirstOrDefault(c => c.Id == id);
+            var existingEntity = _dbContext.TbClientes.FirstOrDefault(c => c.Id == id);
+            if (existingEntity ==null)
+            {
+                throw new NotFoundException("Registro não existe");
+            }
+            return existingEntity;
         }
-
+        public IEnumerable<TbCliente> Get()
+        {
+            var existingEntity = _dbContext.TbClientes.ToList();
+            if (existingEntity == null || existingEntity.Count == 0)
+            {
+                throw new NotFoundException("Nenhum registro encontrado");
+            }
+            return existingEntity;
+        }
         public void Delete(int id)
         {
             var existingEntity = GetById(id);
