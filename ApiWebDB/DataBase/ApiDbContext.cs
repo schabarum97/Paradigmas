@@ -20,7 +20,7 @@ public partial class ApiDbContext : DbContext
     public virtual DbSet<TbEndereco> TbEnderecos { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql("Host=localhost;Database=ApiDB;Username=postgres;Password=marc");
+        => optionsBuilder.UseNpgsql("Host=localhost;Database=ApiDB;Username=postgres;Password=admin");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

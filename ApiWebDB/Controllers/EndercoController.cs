@@ -2,7 +2,6 @@
 using ApiWebDB.Services;
 using ApiWebDB.Services.DTOs;
 using ApiWebDB.Services.Exceptions;
-using ApiWebDB.Services.Parser;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -10,22 +9,21 @@ namespace ApiWebDB.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClientesController : ControllerBase
+    public class EndercoController : ControllerBase
     {
-        public readonly ClienteService _service;
+        public readonly EnderecoService _service;
         private readonly ILogger _logger;
-
-        public ClientesController(ClienteService service, ILogger<ClientesController> logger)
+        public EndercoController(EnderecoService service, ILogger<EndercoController> logger)
         {
             _service = service;
             _logger = logger;
         }
         [HttpPost()]
-        public ActionResult<TbCliente> Insert(ClienteDTO cliente)
+        public ActionResult<TbEndereco> Insert(EnderecoDTO ender)
         {
             try
             {
-                var entity = _service.Insert(cliente);
+                var entity = _service.Insert(ender);
                 return Ok(entity);
             }
             catch (InvalidEntityException E)
@@ -35,30 +33,52 @@ namespace ApiWebDB.Controllers
                     StatusCode = 422
                 };
             }
+            catch (BadRequestException E)
+            {
+                return new ObjectResult(new { error = E.Message })
+                {
+                    StatusCode = 400
+                };
+            }
             catch (System.Exception E)
             {
-                // Exemplo de usabilidade com Log 
                 _logger.LogError(E.Message);
                 return BadRequest(E.Message);
             }
         }
-
         [HttpPut("{id}")]
-        public ActionResult<TbCliente> Update(int id, ClienteDTO dto)
+        public ActionResult<TbEndereco> Update(int id, EnderecoDTO dto)
         {
             try
             {
                 var entity = _service.Update(dto, id);
                 return Ok(entity);
             }
+            catch (InvalidEntityException E)
+            {
+                return new ObjectResult(new { error = E.Message })
+                {
+                    StatusCode = 422
+                };
+            }
+            catch (BadRequestException E)
+            {
+                return new ObjectResult(new { error = E.Message })
+                {
+                    StatusCode = 400
+                };
+            }
+            catch (NotFoundException E)
+            {
+                return NotFound(E.Message);
+            }
             catch (System.Exception e)
             {
                 return BadRequest(e.Message);
             }
         }
-
         [HttpDelete("{id}")]
-        public ActionResult<TbCliente> Delete(int id)
+        public ActionResult<TbEndereco> Delete(int id)
         {
             try
             {
@@ -78,36 +98,12 @@ namespace ApiWebDB.Controllers
             }
         }
         [HttpGet("{id}")]
-        public ActionResult<TbCliente> GetById(int id)
+        public ActionResult<TbEndereco> GetEnder(int id)
         {
             try
             {
-                var entity =  _service.GetById(id);
+                var entity = _service.GetEnder(id);
                 return Ok(entity);
-            }
-            catch (NotFoundException E)
-            {
-                return NotFound(E.Message);
-            }
-            catch (System.Exception e)
-            {
-                return new ObjectResult(new { error = e.Message })
-                {
-                    StatusCode = 500
-                };
-            }
-        }
-        [HttpGet()]
-        public ActionResult<TbCliente> Get()
-        {
-            try
-            {
-                var entity = _service.Get();
-                return Ok(entity);
-            }
-            catch (NotFoundException E)
-            {
-                return NotFound(E.Message);
             }
             catch (System.Exception e)
             {
