@@ -43,7 +43,7 @@ namespace ApiWebDB.Services
 
             if (!EnderecoValidate.Execute(dto))
                 return null;
-
+            
             var entity = EnderecoParser.ToEntity(dto);
 
             var EnderecoId = GetById(id);
