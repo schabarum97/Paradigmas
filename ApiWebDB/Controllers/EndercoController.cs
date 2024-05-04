@@ -55,7 +55,7 @@ namespace ApiWebDB.Controllers
             }
         }
         /// <summary>
-        /// Atualiza os dados do Endereço de acordo com seu ID
+        /// Atualiza os dados do Endereço de acordo com seu Id
         /// </summary>
         /// <returns>Retorna os dados do endereço atualizado</returns>
         /// <response code="200">Retorna o Json com os dados do novo endereço</response>
