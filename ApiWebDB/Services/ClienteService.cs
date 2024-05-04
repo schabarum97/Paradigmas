@@ -75,16 +75,11 @@ namespace ApiWebDB.Services
         public IEnumerable<TbCliente> Get()
         {
             var existingEntity = _dbContext.TbClientes.ToList();
-            if (existingEntity == null || existingEntity.Count == 0)
-            {
-                throw new NotFoundException("Nenhum registro encontrado");
-            }
             return existingEntity;
         }
         public void Delete(int id)
         {
             var existingEntity = GetById(id);
-
             if (existingEntity == null)
             {
                 throw new NotFoundException("Registro não existe");
