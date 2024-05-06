@@ -87,7 +87,10 @@ namespace ApiWebDB.Services
         public TbEndereco GetEnder(int id)
         {
             var existingEntity = _dbContext.TbEnderecos.FirstOrDefault(c => c.Clienteid == id);
-            
+            if (existingEntity == null)
+            {
+                throw new NotFoundException("Registro não existe");
+            }
             return existingEntity;
         }
     }

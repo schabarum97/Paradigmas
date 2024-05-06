@@ -128,6 +128,7 @@ namespace ApiWebDB.Controllers
         /// </summary>
         /// <returns>Retorna os dados do endereço</returns>
         /// <response code="200">Retorna o Json com os dados do endereço</response>
+        /// <response code="404">Endereço não encontrado</response>
         /// <response code="500">Erro interno de servidor</response>
         [HttpGet("{id}")]
         public ActionResult<TbEndereco> GetEnder(int id)
@@ -136,6 +137,10 @@ namespace ApiWebDB.Controllers
             {
                 var entity = _service.GetEnder(id);
                 return Ok(entity);
+            }
+            catch (NotFoundException E)
+            {
+                return NotFound(E.Message);
             }
             catch (System.Exception e)
             {
