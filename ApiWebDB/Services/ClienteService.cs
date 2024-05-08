@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace ApiWebDB.Services
 {
-    public class ClienteService
+    public class ClienteService                 
     {
         private readonly ApiDbContext _dbContext;
 
