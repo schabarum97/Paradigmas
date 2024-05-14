@@ -43,6 +43,7 @@ namespace API_TF.Services.Validate
         {
             if (dto.Description.Length > 255)
                throw new BadRequestException("Tamanho da descrição não pode exceder 255 caracteres");
+
         }
 
         public static bool Execute(ProductDTO dto)
