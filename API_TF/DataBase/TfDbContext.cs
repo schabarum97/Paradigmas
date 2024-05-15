@@ -40,7 +40,7 @@ namespace API_TF.DataBase
                     .HasColumnName("id");
                 entity.Property(e => e.Barcode)
                     .IsRequired()
-                    .HasMaxLength(30)
+                    .HasMaxLength(40)
                     .HasComment("código de barras")
                     .HasColumnName("barcode");
                 entity.Property(e => e.Barcodetype)

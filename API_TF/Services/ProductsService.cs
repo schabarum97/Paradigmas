@@ -3,6 +3,7 @@ using API_TF.DataBase.Models;
 using API_TF.Services.DTO;
 using API_TF.Services.Execptions;
 using API_TF.Services.Parser;
+using API_TF.Services.Validate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +46,9 @@ namespace API_TF.Services
 
         public TbProduct Post (ProductDTO dto)
         {
+            if (!ProductsValidate.Execute(dto))
+                return null;
+
             var product = ProductParser.ToEntity(dto);
 
             _dbContext.Add(product);
@@ -60,6 +64,10 @@ namespace API_TF.Services
             {
                 throw new NotFoundException("Id do produto que foi passado não existe");
             }
+            
+            if (!ProductsValidate.Execute(dto))
+                return null;
+
             var product = ProductParser.ToEntity(dto);
 
             existingEntity.Description = product.Description;

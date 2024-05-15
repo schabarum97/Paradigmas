@@ -4,11 +4,14 @@ using API_TF.Services.DTO;
 using API_TF.Services.Execptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Net.Mime;
 
 namespace API_TF.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Produces(MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml)]
+    [Consumes(MediaTypeNames.Application.Json)]
     public class ProductsController : ControllerBase
     {
         public readonly ProductsService _service;
@@ -57,12 +60,26 @@ namespace API_TF.Controllers
             }
         }
         [HttpPut("{id}")]
-        public ActionResult<TbProduct> Put (int id, ProductDTO product)
+        public ActionResult<TbProduct> Put(int id, ProductDTO product)
         {
             try
             {
                 var entity = _service.Put(product, id);
                 return Ok(entity);
+            }
+            catch (InvalidEntityException E)
+            {
+                return new ObjectResult(new { error = E.Message })
+                {
+                    StatusCode = 422
+                };
+            }
+            catch (BadRequestException E)
+            {
+                return new ObjectResult(new { error = E.Message })
+                {
+                    StatusCode = 400
+                };
             }
             catch (NotFoundException E)
             {
@@ -84,6 +101,20 @@ namespace API_TF.Controllers
             {
                 var entity = _service.Post(product);
                 return Ok(entity);
+            }
+            catch (InvalidEntityException E)
+            {
+                return new ObjectResult(new { error = E.Message })
+                {
+                    StatusCode = 422
+                };
+            }
+            catch (BadRequestException E)
+            {
+                return new ObjectResult(new { error = E.Message })
+                {
+                    StatusCode = 400
+                };
             }
             catch (System.Exception E)
             {
