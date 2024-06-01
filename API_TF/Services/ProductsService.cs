@@ -13,9 +13,11 @@ namespace API_TF.Services
     public class ProductsService
     {
         private readonly TfDbContext _dbContext;
-        public ProductsService(TfDbContext dbContext)
+        private readonly StockLogService _stockLogService;
+        public ProductsService(TfDbContext dbContext, StockLogService stockLogService)
         {
             _dbContext = dbContext;
+            _stockLogService = stockLogService;
         }
 
         public TbProduct GetById(int id)
@@ -49,11 +51,23 @@ namespace API_TF.Services
             if (!ProductsValidate.Execute(dto))
                 return null;
 
+            
             var product = ProductParser.ToEntity(dto);
 
             _dbContext.Add(product);
             _dbContext.SaveChanges();
 
+            Console.WriteLine("ID do produto: " + product.Id);
+
+            var stockLogDto = new StockLogDTO
+            {
+                Productid = product.Id,
+                Qty = dto.Stock,
+                Createdat = DateTime.Now
+            };
+
+            _stockLogService.Post(stockLogDto);
+            
             return product;
         }
 
@@ -94,5 +108,5 @@ namespace API_TF.Services
             _dbContext.Update(existingEntity);
             _dbContext.SaveChanges();
         }
-    }
+    }   
 }

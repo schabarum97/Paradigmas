@@ -4,7 +4,6 @@ namespace API_TF.Services.DTO
 {
     public class PromotionDTO
     {
-        public int Id { get; set; }
         public DateTime Startdate { get; set; }
         public DateTime Enddate { get; set; }
         public int Promotiontype { get; set; }
