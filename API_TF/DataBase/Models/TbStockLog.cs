@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace API_TF.DataBase.Models;
 
@@ -27,6 +28,6 @@ public partial class TbStockLog
     /// Data da movimentação
     /// </summary>
     public DateTime Createdat { get; set; }
-
+    [JsonIgnore]
     public virtual TbProduct Product { get; set; }
 }

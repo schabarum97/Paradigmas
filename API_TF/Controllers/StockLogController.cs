@@ -49,29 +49,5 @@ namespace API_TF.Controllers
                 return BadRequest(e.Message);
             }
         }
-
-        /// <summary>
-        /// Registra um novo log de estoque.
-        /// </summary>
-        /// <param name="dto">Os dados do novo log de estoque.</param>
-        /// <returns>Os detalhes do log de estoque registrado.</returns>
-        /// <response code="200">Retorna o JSON com os detalhes do log de estoque registrado.</response>
-        /// <response code="400">Erro ao processar a solicitação.</response>
-        [HttpPost]
-        [ProducesResponseType(typeof(TbStockLog), 200)]
-        [ProducesResponseType(400)]
-        public ActionResult<TbStockLog> Post(StockLogDTO dto)
-        {
-            try
-            {
-                var log = _service.Post(dto);
-                return Ok(log);
-            }
-            catch (System.Exception e)
-            {
-                _logger.LogError(e.Message);
-                return BadRequest(e.Message);
-            }
-        }
     }
 }

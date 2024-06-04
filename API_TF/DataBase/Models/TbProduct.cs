@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace API_TF.DataBase.Models;
 
@@ -42,9 +43,10 @@ public partial class TbProduct
     /// </summary>
     public decimal Costprice { get; set; }
 
+    [JsonIgnore]
     public virtual ICollection<TbPromotion> TbPromotions { get; set; } = new List<TbPromotion>();
-
+    [JsonIgnore]
     public virtual ICollection<TbSale> TbSales { get; set; } = new List<TbSale>();
-
+    [JsonIgnore]
     public virtual ICollection<TbStockLog> TbStockLogs { get; set; } = new List<TbStockLog>();
 }

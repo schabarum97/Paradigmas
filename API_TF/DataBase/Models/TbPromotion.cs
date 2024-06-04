@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace API_TF.DataBase.Models;
 
@@ -37,6 +38,6 @@ public partial class TbPromotion
     /// Valor da promoção (Se for tipo 0, é o % se for tipo 1, deve ser o valor monetário)
     /// </summary>
     public decimal Value { get; set; }
-
+    [JsonIgnore]
     public virtual TbProduct Product { get; set; }
 }

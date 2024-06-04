@@ -9,12 +9,8 @@ namespace API_TF.Services.Parser
         {
             return new TbSale
             {
-                Code = dto.Code,
-                Createat = dto.Createat,
                 Productid = dto.Productid,
-                Price = dto.Price,
-                Qty = dto.Qty,
-                Discount = dto.Discount
+                Qty = dto.Qty
             };
         }
     }

@@ -56,5 +56,17 @@ namespace API_TF.Services
                                          p.Enddate <= endDate)
                              .ToList();
         }
+
+        public List<TbPromotion> GetActivePromotions(int productId)
+        {
+            var currentDate = DateTime.Now;
+
+            return _dbContext.TbPromotions
+                .Where(p => p.Productid == productId
+                            && p.Startdate <= DateTime.Now
+                            && p.Enddate >= DateTime.Now)
+                .OrderBy(p => p.Promotiontype)
+                .ToList();
+        }
     }
 }
