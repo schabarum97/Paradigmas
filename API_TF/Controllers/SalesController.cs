@@ -30,11 +30,11 @@ namespace API_TF.Controllers
         /// </summary>
         /// <param name="dtoList"></param>
         /// <returns>Os detalhes da venda registrada.</returns>
-        /// <response code="200">Retorna o JSON com os detalhes da venda registrada.</response>
+        /// <response code="201">Retorna o JSON com os detalhes da venda registrada.</response>
         /// <response code="400">Indica que houve um erro de validação nos dados da venda ou que o estoque é insuficiente.</response>
         /// <response code="404">Indica que o produto com o ID especificado não foi encontrado.</response>
         [HttpPost]
-        [ProducesResponseType(typeof(TbSale), 200)]
+        [ProducesResponseType(typeof(TbSale), 201)]
         [ProducesResponseType(400)]
         public IActionResult Post([FromBody] List<SaleDTO> dtoList)
         {
