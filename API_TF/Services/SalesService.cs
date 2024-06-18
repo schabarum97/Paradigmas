@@ -24,9 +24,13 @@ namespace API_TF.Services
             _promotionService = promotionService;
         }
 
-        public TbSale GetById(string id)
-        {
-            return _dbContext.TbSales.FirstOrDefault(s => s.Code == id);
+        public IEnumerable<TbSale> GetById(string code)
+        { 
+            var existingentity = _dbContext.TbSales
+                                           .ToList()
+                                           .Where(s => s.Code == code);
+
+            return existingentity;
         }
 
         public IEnumerable<TbSale> Post(List<SaleDTO> dtoList)

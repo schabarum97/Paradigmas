@@ -65,20 +65,20 @@ namespace API_TF.Controllers
         /// <summary>
         /// Obtém os detalhes de uma venda pelo seu código.
         /// </summary>
-        /// <param name="id">O código da venda.</param>
+        /// <param name="code">O código da venda.</param>
         /// <returns>Os detalhes da venda.</returns>
         /// <response code="200">Retorna o JSON com os detalhes da venda.</response>
         /// <response code="404">Venda não encontrada.</response>
         /// <response code="400">Erro ao processar a solicitação.</response>
-        [HttpGet("{id}")]
+        [HttpGet("{code}")]
         [ProducesResponseType(typeof(TbSale), 200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
-        public ActionResult<TbSale> GetById(string id)
+        public ActionResult<IEnumerable<TbSale>> GetById(string code)
         {
             try
             {
-                var sale = _service.GetById(id);
+                var sale = _service.GetById(code);
                 if (sale == null)
                     return NotFound("Sale not found");
 
