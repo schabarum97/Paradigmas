@@ -52,8 +52,8 @@ namespace API_TF.Services
         {
             return _dbContext.TbPromotions
                              .Where(p => p.Productid == productId &&
-                                         p.Startdate >= startDate &&
-                                         p.Enddate <= endDate)
+                                         startDate >= p.Startdate &&
+                                         endDate <= p.Enddate)
                              .ToList();
         }
 
